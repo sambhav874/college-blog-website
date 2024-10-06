@@ -28,7 +28,7 @@ const AdmissionsPage = () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/pages`, {
           params: {
-            populate: 'FeaturedImage', // Ensure the image is populated
+            populate: 'FeaturedImage',
           },
         });
         const aboutPage = response.data.data.find((page: PageData) => page.Slug === 'admissions');

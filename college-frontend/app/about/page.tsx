@@ -28,7 +28,7 @@ const AboutPage = () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/pages`, {
           params: {
-            populate: 'FeaturedImage', // Ensure the image is populated
+            populate: 'FeaturedImage',
           },
         });
         const aboutPage = response.data.data.find((page: PageData) => page.Slug === 'about-us');
@@ -48,7 +48,7 @@ const AboutPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-4">{pageData.Title}</h1>
-      {/* Render the featured image if available */}
+      
       {pageData.FeaturedImage && (
         <img
           src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${pageData.FeaturedImage.url}`}
@@ -61,7 +61,10 @@ const AboutPage = () => {
           switch (section.type) {
             case 'heading':
               const HeadingTag = `h${section.level}` as keyof JSX.IntrinsicElements;
-              return <HeadingTag key={index}>{section.children[0].text}</HeadingTag>;
+              return <h2 key={index} className={`text-${section.level}xl font-bold mt-4`}>
+                        {section.children[0].text}
+                        </h2>
+
             case 'paragraph':
               return <p key={index}>{section.children[0].text}</p>;
             case 'list':

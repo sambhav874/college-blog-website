@@ -23,6 +23,12 @@
     },
     "Content": {
       "type": "blocks"
+    },
+    "enrollments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::enrollment.enrollment",
+      "mappedBy": "course"
     }
   }
 }

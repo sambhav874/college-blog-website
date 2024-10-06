@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Define the shape of the homepage data
+
 interface HomepageData {
   id: number;
   documentId: string;
@@ -12,11 +12,11 @@ interface HomepageData {
   locale: string | null;
 }
 
-// Fetch homepage data from Strapi using Axios
+
 async function getHomepage(): Promise<HomepageData> {
   try {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/homepage`);
-    console.log('Fetched Homepage Data:', response.data);
+   
     return response.data.data;
   } catch (error) {
     console.error('Error fetching homepage data:', error);

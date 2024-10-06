@@ -1,6 +1,7 @@
 import axios from 'axios';
-import Link from 'next/link'; // Import Link for routing
+import Link from 'next/link'; 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 interface CourseData {
   id: number;
@@ -11,7 +12,7 @@ interface CourseData {
   documentId : any;
 }
 
-// Fetch courses using Axios
+
 async function getCourses(): Promise<CourseData[]> {
   try {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/courses?populate=*`);
@@ -33,7 +34,7 @@ export default async function Home() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {courses.map((course) => (
-          <Card key={course.id} className="bg-white shadow-md">
+          <Card key={course.id} className="bg-white pb-4 shadow-md">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold">
                 {course.Title}
@@ -65,13 +66,15 @@ export default async function Home() {
               })}
             </CardContent>
 
-            {/* Add button to navigate to the course detail page */}
+           
             <div className="mt-4 flex justify-center items-center">
+                <Button>
               <Link href={`/courses/${course.documentId}`} passHref>
-                <p className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <p className="text-white">
                   View Course
                 </p>
               </Link>
+              </Button>
             </div>
           </Card>
         ))}

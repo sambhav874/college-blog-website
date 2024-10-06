@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Link from 'next/link';  // Correct import of Link
 import './globals.css';
+import Navbar from '@/components/Navbar';
 
 // Local fonts
 const geistSans = localFont({
@@ -31,26 +32,13 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="min-h-screen flex flex-col">
           {/* Header */}
-          <header className="bg-blue-600 text-white p-4">
-            <nav className="container mx-auto flex justify-between items-center">
-              <Link href="/" className="text-2xl font-bold">
-                Aryabhatta College
-              </Link>
-              <ul className="flex space-x-4">
-                <li><Link href="/" className="hover:underline">Home</Link></li>
-                <li><Link href="/about" className="hover:underline">About</Link></li>
-                <li><Link href="/courses" className="hover:underline">Courses</Link></li>
-                <li><Link href="/contact" className="hover:underline">Contact</Link></li>
-              </ul>
-            </nav>
-          </header>
-
+          <Navbar />
           {/* Main content */}
           <main className="flex-grow container mx-auto py-8 px-4">
             {children}
           </main>
 
-          {/* Footer */}
+          
           <footer className="bg-gray-200 p-4">
             <div className="container mx-auto text-center">
               &copy; {new Date().getFullYear()} College Name. All rights reserved.
