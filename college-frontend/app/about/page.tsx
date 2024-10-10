@@ -71,7 +71,7 @@ const AboutPage = () => {
               return (
                 <ul key={index}>
                   {section.children.map((listItem, idx) => (
-                    <li key={idx}>{listItem.children[0].text}</li>
+                    <li key={idx}>{listItem.text}</li>
                   ))}
                 </ul>
               );

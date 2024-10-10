@@ -470,10 +470,6 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    enrollments: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::enrollment.enrollment'
-    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -485,72 +481,6 @@ export interface PluginUsersPermissionsUser
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
-    >;
-  };
-}
-
-export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
-  collectionName: 'courses';
-  info: {
-    singularName: 'course';
-    pluralName: 'courses';
-    displayName: 'Course';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Schema.Attribute.String;
-    Slug: Schema.Attribute.UID<'Title'>;
-    Description: Schema.Attribute.Text;
-    Content: Schema.Attribute.Blocks;
-    enrollments: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::enrollment.enrollment'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
-  };
-}
-
-export interface ApiEnrollmentEnrollment extends Struct.CollectionTypeSchema {
-  collectionName: 'enrollments';
-  info: {
-    singularName: 'enrollment';
-    pluralName: 'enrollments';
-    displayName: 'Enrollment';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    users_permissions_user: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
-    enrollmentDate: Schema.Attribute.Date;
-    enrollmentStatus: Schema.Attribute.Enumeration<
-      ['Enrolled', 'Completed ', 'Dropped']
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::enrollment.enrollment'
     >;
   };
 }
@@ -579,6 +509,71 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::homepage.homepage'
+    >;
+  };
+}
+
+export interface ApiInsuranceInsurance extends Struct.CollectionTypeSchema {
+  collectionName: 'insurances';
+  info: {
+    singularName: 'insurance';
+    pluralName: 'insurances';
+    displayName: 'Insurance';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::insurance.insurance'
+    >;
+  };
+}
+
+export interface ApiInsuranceQuoteInsuranceQuote
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'insurance_quotes';
+  info: {
+    singularName: 'insurance-quote';
+    pluralName: 'insurance-quotes';
+    displayName: 'Insurance Quote';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+    contact_number: Schema.Attribute.String;
+    email: Schema.Attribute.Email;
+    appointmentDate: Schema.Attribute.Date;
+    insurance: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::insurance.insurance'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::insurance-quote.insurance-quote'
     >;
   };
 }
@@ -987,9 +982,9 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::course.course': ApiCourseCourse;
-      'api::enrollment.enrollment': ApiEnrollmentEnrollment;
       'api::homepage.homepage': ApiHomepageHomepage;
+      'api::insurance.insurance': ApiInsuranceInsurance;
+      'api::insurance-quote.insurance-quote': ApiInsuranceQuoteInsuranceQuote;
       'api::page.page': ApiPagePage;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

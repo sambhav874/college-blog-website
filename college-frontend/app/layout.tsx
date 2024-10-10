@@ -31,17 +31,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="min-h-screen flex flex-col">
-          {/* Header */}
+          
           <Navbar />
-          {/* Main content */}
-          <main className="flex-grow container mx-auto py-8 px-4">
+          
+          <main >
             {children}
           </main>
 
           
           <footer className="bg-gray-200 p-4">
             <div className="container mx-auto text-center">
-              &copy; {new Date().getFullYear()} College Name. All rights reserved.
+              &copy; {new Date().getFullYear()} Wing Heights. All rights reserved.
             </div>
           </footer>
         </div>
