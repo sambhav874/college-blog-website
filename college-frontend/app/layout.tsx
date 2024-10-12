@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import Link from 'next/link';  // Correct import of Link
 import './globals.css';
 import Navbar from '@/components/Navbar';
+import BotWidget from '@/components/AIBot';
 
 // Local fonts
 const geistSans = localFont({
@@ -36,6 +37,7 @@ export default function RootLayout({
           
           <main >
             {children}
+            <BotWidget />
           </main>
 
           
